@@ -39,6 +39,9 @@ function App() {
 
 	if (checkingAuth) return <LoadingSpinner />;
 
+	const hideBannerOnPaths = ["/AboutUs", "/ContactUs","/Faq","/CategoryPage"];
+
+
 	return (
 		<div className='min-h-screen bg-gray-900 text-white relative overflow-hidden'>
 			{/* Background gradient */}
@@ -49,8 +52,10 @@ function App() {
 			</div>
 
 			<div className='relative z-50 pt-20'>
+				{/* Conditionally render the banner */}
+				{!hideBannerOnPaths.includes(location.pathname) && <Banner />}
 				<Navbar />
-				<Banner/>
+				{/* <Banner/> */}
 				<Routes>
 					<Route path='/' element={<HomePage />} />
 					<Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
